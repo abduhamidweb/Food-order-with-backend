@@ -1,0 +1,14 @@
+.cards {
+  height: 600px;
+  overflow-y: scroll;
+}
+.main{
+  height: 600px;
+  background: rgba(255, 255, 0, 0.459);
+  overflow-x: scroll;
+}
+.cardProduc{
+  margin: 20px;
+  width: 300px !important;
+  background: red;
+}
