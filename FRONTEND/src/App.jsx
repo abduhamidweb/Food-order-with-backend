@@ -13,20 +13,33 @@ function App() {
   };
   const BASEURL = `http://localhost:5000/`
   const [data, setData] = useState([]);
+  const [user, setUser] = useState(null);
+  console.log('user :', user);
   const [dataFood, setDataFood] = useState([]);
+  const [dataById, setDataById] = useState(1);
+  async function fetchDataUsersById(id) {
+    const response = await fetch(`http://localhost:5000/users/${id}`);
+    const data = await response.json();
+  setData(data);
+  }
+  // setDataById(1)
+  dataById > 0 ? console.log(user) : null
   useEffect(() => {
+    dataById > 0 ? fetchDataUsersById(dataById) : null
     async function fetchDataUsers() {
       const response = await fetch('http://localhost:5000/users/');
       const data = await response.json();
       setData(data);
     }
     fetchDataUsers()
+
     async function fetchDataFoods() {
       const response = await fetch('http://localhost:5000/food/');
       const data = await response.json();
       setDataFood(data);
     }
     fetchDataFoods()
+    console.log(user);
   }, [])
   return (
     <Container fluid>
@@ -36,7 +49,7 @@ function App() {
           <div className="cards">
             {
               data.length ? data.map((item) => {
-                return <ContactCard name={item.username} phone={item.phoneNumber} />
+                return <ContactCard name={item.username} data={item} phone={item.phoneNumber} funk={setDataById} />
               }) : null
             }
           </div>
